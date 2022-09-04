@@ -48,12 +48,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
+app.UseHttpsRedirection();
+app.UseCors("AllowAll");
+
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapGet("/", async context =>
-    {
-        await context.Response.WriteAsync("Notes");
-    });
+    endpoints.MapControllers();
 });
 
 app.Run();
