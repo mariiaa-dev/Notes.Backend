@@ -5,7 +5,6 @@ using Notes.Application.Interfaces;
 using Notes.Application;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
 ConfigurationManager configuration = (ConfigurationManager)builder.Configuration;
 
@@ -17,6 +16,7 @@ builder.Services.AddAutoMapper(config =>
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(configuration);
+builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
@@ -27,6 +27,8 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin();
     });
 });
+
+var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
